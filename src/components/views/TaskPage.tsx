@@ -2,14 +2,14 @@ import React, {FormEvent, useState} from 'react';
 import styles from "./../Form.module.css"
 import spinner from "./spin.gif"
 
-type Post = {
+export type Post = {
     userId: string;
     id: string;
     title: string;
     body: string;
 } | undefined;
 
-type PostInfo = {
+export type PostInfo = {
     id: string;
     name: string;
     username: string;

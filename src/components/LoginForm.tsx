@@ -1,6 +1,9 @@
 import styles from "./Form.module.css"
 import { Form as FinalForm, Field } from "react-final-form"
 import {composeValidators, isValidLogin, required} from "./Validators";
+import {useState} from "react";
+
+const URL = "http://localhost:3001";
 
 export type FormData = {
     login: string;
@@ -11,10 +14,38 @@ type FormProps = {
     onSubmit: (data: FormData) => void;
 }
 
-export default function LoginForm({onSubmit}: FormProps) {
+type Result = {
+    token: string;
+} | undefined;
 
-    const submitHandler = (data: FormData) => {
+export default function LoginForm({onSubmit}: FormProps) {
+    const [error, setError] = useState("");
+    const [result, setResult] = useState<Result>();
+
+    const submitHandler = async (data: FormData) => {
         onSubmit(data);
+
+        try {
+            const postData = {
+                // данные из формы
+                nickname: data.login,
+                password: data.password
+            };
+            const response = await fetch(`${URL}/auth`, {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(postData)
+            });
+            const result = await response.json();
+            setResult(result);
+        } catch (e) {
+            if (e instanceof Error) {
+                setError(e.message);
+            }
+        }
     };
 
     return <>
