@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from 'react';
-import styles from "./../Form.module.css"
+import styles from "../components/LoginRegistrationForm/Form.module.css"
 import spinner from "./spin.gif"
 
 export type Post = {

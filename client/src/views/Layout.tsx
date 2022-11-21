@@ -17,12 +17,6 @@ const Layout = () => {
                 <li>
                     <Link to="/task/1">Task 1</Link>
                 </li>
-                <li>
-                    <Link to="/task/2">Task 2</Link>
-                </li>
-                <li>
-                    <Link to="/task/3">Task 3</Link>
-                </li>
             </ul>
         </nav>
         <Outlet />
